@@ -1,0 +1,62 @@
+name: orion-trading-env
+version: "1.0.0"
+description: >
+  Indian NSE equity trading simulation with realistic market regimes
+  (bull, bear, sideways, volatile), STCG/LTCG tax, brokerage fees,
+  and DP charges. Three difficulty levels with multiple agent types.
+author: itsashishthakurr
+license: MIT
+
+environment:
+  type: trading
+  observation_space: text
+  action_space:
+    type: discrete
+    actions: [BUY, SELL, HOLD]
+  reward_range: [0.01, 0.99]
+
+tasks:
+  - id: easy
+    name: easy
+    difficulty: easy
+    description: "Low volatility market, no tax, 50 steps, max 12 holdings"
+    max_steps: 50
+    reward_range: [0.01, 0.99]
+  - id: medium
+    name: medium
+    difficulty: medium
+    description: "Medium volatility, STCG tax applies, 100 steps, max 8 holdings"
+    max_steps: 100
+    reward_range: [0.01, 0.99]
+  - id: hard
+    name: hard
+    difficulty: hard
+    description: "High volatility, STCG tax + DP charges, 150 steps, max 5 holdings"
+    max_steps: 150
+    reward_range: [0.01, 0.99]
+
+agents:
+  - random
+  - smart
+  - learning
+
+actions:
+  - BUY
+  - SELL
+  - HOLD
+
+endpoints:
+  health: GET /health
+  reset: POST /reset
+  step: POST /step
+  state: GET /state
+  tasks: GET /tasks
+  grader: GET /grader
+
+server:
+  port: 7860
+  workers: 2
+
+huggingface:
+  space_id: itsashishthakurr/orion-trading-simulation
+  sdk: docker
