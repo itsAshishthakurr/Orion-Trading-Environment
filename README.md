@@ -160,7 +160,7 @@ Final: max(0.01, min(0.99, base))
 
 | Model | Easy | Medium | Hard | Overall | Result |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| *(run inference.py to fill this table)* | — | — | — | — | — |
+| *(will fill later* | — | — | — | — | — |
 
 ---
 
